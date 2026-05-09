@@ -1,11 +1,19 @@
-import React from 'react'
+import { Suspense } from 'react'
+import CustomersTable from '../../customers/table'
+import { CardSkeleton } from '../../skeletons'
 
-const page = () => {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams?: { query?: string }
+}) {
+  const query = searchParams?.query || ''
+
   return (
     <div>
-      customer page
+      <Suspense fallback={<CardSkeleton />}>
+        <CustomersTable query={query} />
+      </Suspense>
     </div>
   )
 }
-
-export default page
